@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 ReactDOM.render(
-  React.createElement("h1", null, "Hello Chucktown"),
+  React.createElement(
+    "h1",
+    {style: {color: "#003366"}},
+    "Hello Chucktown"
+  ),
   document.getElementById('root')
 );
 
 ReactDOM.render(
-  React.createElement("p", null, "Just a little playing around to see if I understand"),
+  React.createElement(
+    "p",
+    null,
+    "Here are some parts of town."
+  ),
   document.getElementById('extra')
+);
+
+ReactDOM.render(
+  <ul>
+    <li>Downtown</li>
+    <li>West Ashley</li>
+    <li>James Island</li>
+    <li>Park Circle</li>
+  </ul>
+  ,
+  document.getElementById('list')
 );
