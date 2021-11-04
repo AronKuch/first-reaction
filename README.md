@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Built from LinkedIn Learning
+
+React.js Essential Training by Eve Porcello: https://www.linkedin.com/learning/react-js-essential-training
+
 ## Available Scripts
 
 In the project directory, you can run:
