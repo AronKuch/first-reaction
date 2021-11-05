@@ -1,4 +1,4 @@
-
+import React, {useState} from "react";
 import './App.css';
 import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
@@ -45,11 +45,24 @@ function List(props){
    );
 }
 
+
+
 function App(props) {
+  const [status, setStatus] = useState("working");
   return (
     <div className="App">
       <Head city = "Chucktown"/>
       {props.pictures ? <Pictures /> : <List />}
+      <p>Aron is {status}.</p>
+      <button onClick={() => setStatus("working")}>
+        Work
+      </button>
+      <button onClick={() => setStatus("learning")}>
+        Learn
+      </button>
+      <button onClick={() => setStatus("chilling")}>
+        Chill
+      </button>
     </div>
   );
 }
