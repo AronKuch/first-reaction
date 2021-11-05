@@ -1,4 +1,4 @@
-
+import React, {useState, useEffect, useReducer} from "react";
 import './App.css';
 import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
@@ -10,36 +10,73 @@ function Head(props){
   );
 }
 
-function Main(props){
+function Pictures(){
+  const langObjects = [
+    {id: 1, name: "HTML5", logo: logo_html5},
+    {id: 0, name: "R", logo: logo_R},
+    {id: 2, name: "Apex", logo: logo_Apex}
+  ]
+
   return(
     <section>
     <p>Here is an abreviated list of programming languages I have played around with at one point or another.</p>
     <ul>
-      {props.langs.map((lang) =>
+      {langObjects.map((lang) =>
         (<li key = {lang.id}>{lang.name} <img src={lang.logo} alt= {lang.name + " logo"} height = {50} /></li>))}
     </ul>
     </section>
   );
 }
 
-// const languages = [
-//   "HTML", "CSS", "JavaScript", "Java", "Python", "C", "C++", "R", "MySQL", "PHP", "Apex"
-// ]
-//
-// const langObjects = languages.map((lang, i) => ({id: i, name: lang}));
+function List(props){
+  const languages = [
+    "HTML", "CSS", "JavaScript", "Java", "Python", "C", "C++", "R", "MySQL", "PHP", "Apex"
+  ]
+  const langListAsObjects = languages.map((lang, i) => ({id: i, name: lang}));
 
-const langObjects = [
-  {id: 1, name: "HTML5", logo: logo_html5},
-  {id: 0, name: "R", logo: logo_R},
-  {id: 2, name: "Apex", logo: logo_Apex}
-]
+  return(
+    <section>
+     <p>Here are some programming languages I have played around with at one point or another.</p>
+     <ul>
+       {langListAsObjects.map((lang) =>
+         (<li key = {lang.id}>{lang.name}</li>))}
+     </ul>
+     </section>
+   );
+}
 
 
-function App() {
+
+function App(props) {
+  const [status, setStatus] = useState("working");
+
+  useEffect(() => {
+    console.log(`I'm ${status} here!`);
+  }, [status] );
+
+  const [checked, switcher] = useReducer(
+    (checked) => !checked,
+    false
+  );
+
+
   return (
     <div className="App">
       <Head city = "Chucktown"/>
-      <Main langs = {langObjects} />
+      {props.pictures ? <Pictures /> : <List />}
+      <p>Aron is {status}.</p>
+      <button onClick={() => setStatus("working")}>
+        Work
+      </button>
+      <button onClick={() => setStatus("learning")}>
+        Learn
+      </button>
+      <button onClick={() => setStatus("chilling")}>
+        Chill
+      </button>
+      <p>This module is {checked ? "useful" : "useless" }
+        <input type="checkbox" value={checked} onChange={switcher} />
+      </p>
     </div>
   );
 }
