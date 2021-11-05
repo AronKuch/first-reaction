@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import './App.css';
 import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
@@ -49,6 +49,17 @@ function List(props){
 
 function App(props) {
   const [status, setStatus] = useState("working");
+
+  useEffect(() => {
+    console.log(`I'm ${status} here!`);
+  }, [status] );
+
+  const [checked, switcher] = useReducer(
+    (checked) => !checked,
+    false
+  );
+
+
   return (
     <div className="App">
       <Head city = "Chucktown"/>
@@ -63,6 +74,9 @@ function App(props) {
       <button onClick={() => setStatus("chilling")}>
         Chill
       </button>
+      <p>This module is {checked ? "useful" : "useless" }
+        <input type="checkbox" value={checked} onChange={switcher} />
+      </p>
     </div>
   );
 }
