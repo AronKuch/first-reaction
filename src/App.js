@@ -5,7 +5,7 @@ import logo_R from "./R.svg";
 import logo_Apex from "./Apex.png";
 import {Checkbox} from "./Checkbox.js";
 import {Routes, Route} from "react-router-dom";
-import {Home, About, Events, Contact, BadPage} from "./pages"
+import {Home, About, Events, Contact, BadPage, History, Location} from "./pages"
 
 function Head(props){
   return(
@@ -93,7 +93,10 @@ function App(props) {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About />}>
+          <Route path="history" element={<History />}/>
+          <Route path="location" element={<Location />}/>
+          </Route>
           <Route path="/events" element={<Events />}/>
           <Route path="/contact" element={<Contact />}/>
           <Route path="*" element={<BadPage />}/>

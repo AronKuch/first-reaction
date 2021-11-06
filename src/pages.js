@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, Outlet} from "react-router-dom";
 
 function Footer(){
   return(
@@ -24,7 +24,23 @@ export function About(){
   return(
     <div>
       <h1>[About Us]</h1>
+      <Outlet />
       <Footer />
+    </div>
+  );
+}
+
+export function History(){
+  return(
+    <div>
+      <h2>My History</h2>
+    </div>
+  );
+}
+export function Location(){
+  return(
+    <div>
+      <h2>Proudly Made in Charleston, SC, USA.</h2>
     </div>
   );
 }
