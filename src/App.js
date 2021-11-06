@@ -1,11 +1,9 @@
-import React, {useState, useEffect, useReducer} from "react";
+import React, {useState, useEffect} from "react";
 import './App.css';
 import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
 import logo_Apex from "./Apex.png";
-
-
-//
+import {Checkbox} from "./Checkbox.js";
 
 function Head(props){
   return(
@@ -88,7 +86,8 @@ function App(props) {
       </button>
       <button onClick={() => setStatus("chilling")}>
         Chill
-      </button>
+      </button><br /> <br />
+      <Checkbox />
     </div>
   );
 }
