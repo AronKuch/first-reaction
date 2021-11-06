@@ -4,6 +4,8 @@ import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
 import logo_Apex from "./Apex.png";
 import {Checkbox} from "./Checkbox.js";
+import {Routes, Route} from "react-router-dom";
+import {Home, About, Events, Contact} from "./pages"
 
 function Head(props){
   return(
@@ -88,6 +90,15 @@ function App(props) {
         Chill
       </button><br /> <br />
       <Checkbox />
+      <div>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/events" element={<Events />}/>
+          <Route path="/contact" element={<Contact />}/>
+        </Routes>
+
+      </div>
     </div>
   );
 }
