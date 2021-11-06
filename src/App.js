@@ -4,6 +4,9 @@ import logo_html5 from "./HTML5.svg";
 import logo_R from "./R.svg";
 import logo_Apex from "./Apex.png";
 
+
+//
+
 function Head(props){
   return(
     <h1>Hello {props.city}, again</h1>
@@ -45,24 +48,36 @@ function List(props){
    );
 }
 
+function GitHub() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://api.github.com/users/aronkuch')
+    .then((response) => response.json())
+    .then(setData)
+    .then(setLoading(false))
+    .catch(setError);
+  }, []);
+  if (loading) return <h3>Loading...</h3>;
+  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  if (!data) return null;
+  return(
+  <p>I'm {data.name}, my GitHub is <a href={data.html_url}>{data.html_url}</a>. I have {data.public_repos} repos that you know of.</p>
+  );
+}
 
 
 function App(props) {
   const [status, setStatus] = useState("working");
 
-  useEffect(() => {
-    console.log(`I'm ${status} here!`);
-  }, [status] );
-
-  const [checked, switcher] = useReducer(
-    (checked) => !checked,
-    false
-  );
-
 
   return (
     <div className="App">
       <Head city = "Chucktown"/>
+      <GitHub />
       {props.pictures ? <Pictures /> : <List />}
       <p>Aron is {status}.</p>
       <button onClick={() => setStatus("working")}>
@@ -74,9 +89,6 @@ function App(props) {
       <button onClick={() => setStatus("chilling")}>
         Chill
       </button>
-      <p>This module is {checked ? "useful" : "useless" }
-        <input type="checkbox" value={checked} onChange={switcher} />
-      </p>
     </div>
   );
 }
