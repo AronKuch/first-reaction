@@ -48,28 +48,36 @@ function List(props){
    );
 }
 
+function GitHub() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://api.github.com/users/aronkuch')
+    .then((response) => response.json())
+    .then(setData)
+    .then(setLoading(false))
+    .catch(setError);
+  }, []);
+  if (loading) return <h3>Loading...</h3>;
+  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  if (!data) return null;
+  return(
+  <p>I'm {data.name}, my GitHub is <a href={data.html_url}>{data.html_url}</a>. I have {data.public_repos} repos that you know of.</p>
+  );
+}
 
 
 function App(props) {
   const [status, setStatus] = useState("working");
 
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('https://api.github.com/users/aronkuch')
-    .then((response) => response.json())
-    .then(setData);
-  }, []);
-
-//       <p>I'm {data.name}, my GitHub is {data.hmtl_url}. I have {data.public_repos} that you know of.</p>
-
 
   return (
     <div className="App">
       <Head city = "Chucktown"/>
-      <p>I'm {data.name},
-          my GitHub is <a href={data.html_url}>{data.html_url}</a>.
-          I have {data.public_repos} repos that you know of.</p>
+      <GitHub />
       {props.pictures ? <Pictures /> : <List />}
       <p>Aron is {status}.</p>
       <button onClick={() => setStatus("working")}>
